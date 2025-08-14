@@ -1,7 +1,5 @@
 import pandas as pd
 import streamlit as st
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 df = pd.read_excel("vendas.xlsx")
 st.title("📊 Dashboard de Vendas - Missão Anti-Planilha™")
@@ -30,20 +28,3 @@ col1.metric("📉 Média Geral", f"R$ {media_vendas:,.2f}")
 col2.metric("🏪 Total da Filial", f"R$ {vendas_filial:,.2f}")
 
 
-# Gráfico de barras - Vendas por Filial
-st.subheader("🏢 Total de Vendas por Filial")
-vendas_filial_total = df.groupby("filial")["preco"].sum().sort_values()
-fig, ax = plt.subplots(figsize=(10, 5))
-sns.barplot(x=vendas_filial_total.values, y=vendas_filial_total.index, palette="Blues_d", ax=ax)
-ax.set_title("Total de Vendas por Filial")
-ax.set_xlabel("R$ Vendido")
-ax.set_ylabel("Filial")
-st.pyplot(fig)
-
-# Gráfico de pizza - Participação de Produtos
-st.subheader("🥧 Participação de Vendas por Produto")
-vendas_produto = df.groupby("produto")["preco"].sum()
-fig2, ax2 = plt.subplots(figsize=(8, 8))
-ax2.pie(vendas_produto, labels=vendas_produto.index, autopct='%1.1f%%', startangle=140)
-ax2.set_title("Participação de Vendas por Produto")
-st.pyplot(fig2)
