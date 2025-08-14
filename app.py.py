@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
-from fpdf import FPDF
+import FPDF as fpdf
 
 df = pd.read_excel("vendas.xlsx")
 st.title("📊 Dashboard de Vendas - Missão Anti-Planilha™")
@@ -58,4 +58,5 @@ if st.button("📥 Baixar Relatório"):
             file_name="relatorio_vendas.pdf",
             mime="application/pdf"
         )
+
 
