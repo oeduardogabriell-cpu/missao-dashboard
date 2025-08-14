@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+from fpdf import FPDF
 
 df = pd.read_excel("vendas.xlsx")
 st.title("📊 Dashboard de Vendas - Missão Anti-Planilha™")
@@ -26,3 +27,32 @@ st.bar_chart(ranking_vendedores)
 col1, col2 = st.columns(2)
 col1.metric("📉 Média Geral", f"R$ {media_vendas:,.2f}")
 col2.metric("🏪 Total da Filial", f"R$ {vendas_filial:,.2f}")
+
+# Botão de download do relatório em PDF
+st.subheader("📄 Gerar Relatório PDF")
+
+# Geração do PDF
+if st.button("📥 Baixar Relatório"):
+    pdf = FPDF()
+    pdf.add_page()
+
+    # Adiciona fonte com suporte a acento (você precisa subir o arquivo DejaVuSans.ttf no GitHub!)
+    pdf.add_font('DejaVu', '', 'DejaVuSans.ttf', uni=True)
+    pdf.set_font('DejaVu', '', 14)
+
+    pdf.cell(0, 10, f'Relatório de Vendas - Filial {filial}', ln=True)
+
+    for vendedor, valor in ranking_vendedores.items():
+        pdf.cell(0, 10, f'{vendedor}: R$ {valor:,.2f}', ln=True)
+
+    # Salva o PDF
+    pdf.output("relatorio_vendas.pdf")
+
+    # Exibe link de download
+    with open("relatorio_vendas.pdf", "rb") as f:
+        st.download_button(
+            label="📎 Clique aqui para baixar o PDF",
+            data=f,
+            file_name="relatorio_vendas.pdf",
+            mime="application/pdf"
+        )
