@@ -48,4 +48,14 @@ ax2.set_title("Participação de Vendas por Produto")
 st.pyplot(fig2)
 
 
+pdf = FPDF()
+pdf.add_page()
+pdf.set_font('Arial', 'B', 16)
+
+pdf.cell(0, 10, 'Relatório de Vendas por Loja', ln=True)
+
+for loja, valor in total_vendas_loja.items():
+    pdf.cell(0, 10, f'{loja}: R$ {valor:,.2f}', ln=True)
+
+pdf.output('relatorio_vendas.pdf')
 
