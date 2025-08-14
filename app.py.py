@@ -1,7 +1,5 @@
 import pandas as pd
 import streamlit as st
-!pip install fpdf
-from fpdf import FPDF
 
 df = pd.read_excel("vendas.xlsx")
 st.title("📊 Dashboard de Vendas - Missão Anti-Planilha™")
@@ -28,15 +26,3 @@ st.bar_chart(ranking_vendedores)
 col1, col2 = st.columns(2)
 col1.metric("📉 Média Geral", f"R$ {media_vendas:,.2f}")
 col2.metric("🏪 Total da Filial", f"R$ {vendas_filial:,.2f}")
-
-pdf = FPDF()
-pdf.add_page()
-pdf.set_font('Arial', 'B', 16)
-
-pdf.cell(0, 10, 'Relatório de Vendas por Loja', ln=True)
-
-for loja, valor in total_vendas_loja.items():
-    pdf.cell(0, 10, f'{loja}: R$ {valor:,.2f}', ln=True)
-
-pdf.output('relatorio_vendas.pdf')
-
