@@ -1,5 +1,7 @@
 import pandas as pd
 import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 df = pd.read_excel("vendas.xlsx")
 st.title("📊 Dashboard de Vendas - Missão Anti-Planilha™")
@@ -44,5 +46,6 @@ fig2, ax2 = plt.subplots(figsize=(8, 8))
 ax2.pie(vendas_produto, labels=vendas_produto.index, autopct='%1.1f%%', startangle=140)
 ax2.set_title("Participação de Vendas por Produto")
 st.pyplot(fig2)
+
 
 
