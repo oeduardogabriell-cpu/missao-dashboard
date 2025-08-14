@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+!pip install fpdf
 from fpdf import FPDF
 
 df = pd.read_excel("vendas.xlsx")
@@ -30,15 +31,12 @@ col2.metric("🏪 Total da Filial", f"R$ {vendas_filial:,.2f}")
 
 pdf = FPDF()
 pdf.add_page()
-pdf.set_font("Arial", size=12)
+pdf.set_font('Arial', 'B', 16)
 
-pdf.cell(200, 10, txt="Relatório de Vendas por Filial", ln=True, align="C")
-pdf.ln(10)
+pdf.cell(0, 10, 'Relatório de Vendas por Loja', ln=True)
 
-for index, row in resumo.iterrows():
-    filial = row["filial"]
-    total = row["preco"]
-    pdf.cell(200, 10, txt=f"{filial}: R$ {total:,.2f}", ln=True)
-    pdf.set_font("Arial", size=12)
+for loja, valor in total_vendas_loja.items():
+    pdf.cell(0, 10, f'{loja}: R$ {valor:,.2f}', ln=True)
 
+pdf.output('relatorio_vendas.pdf')
 
