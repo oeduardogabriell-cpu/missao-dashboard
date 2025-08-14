@@ -1,5 +1,7 @@
 import pandas as pd
 import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
 from fpdf import FPDF
 
 df = pd.read_excel("vendas.xlsx")
@@ -56,3 +58,4 @@ if st.button("📥 Baixar Relatório"):
             file_name="relatorio_vendas.pdf",
             mime="application/pdf"
         )
+
