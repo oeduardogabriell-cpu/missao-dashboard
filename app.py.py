@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from fpdf import FPDF
 
+
 df = pd.read_excel("vendas.xlsx")
 st.title("📊 Dashboard de Vendas - Missão Anti-Planilha™")
 filial = st.selectbox("Filtrar por filial:", df["filial"].unique())
