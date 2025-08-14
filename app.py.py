@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
+from fpdf import FPDF
 
 df = pd.read_excel("vendas.xlsx")
 st.title("📊 Dashboard de Vendas - Missão Anti-Planilha™")
@@ -58,4 +59,5 @@ for loja, valor in total_vendas_loja.items():
     pdf.cell(0, 10, f'{loja}: R$ {valor:,.2f}', ln=True)
 
 pdf.output('relatorio_vendas.pdf')
+
 
