@@ -10,14 +10,14 @@ st.title("📊 Dashboard de Vendas - Missão Anti-Planilha™")
 filial = st.selectbox("Filtrar por filial:", df["filial"].unique())
 df_filtro = df[df["filial"] == filial]
 
+# Alerta automático se estiver abaixo da média
 media_vendas = df.groupby("filial")["preco"].sum().mean()
 vendas_filial = df_filtro["preco"].sum()
 
 if vendas_filial < media_vendas:
-st.error("■■ Esta filial vendeu abaixo da média!")
-
+    st.error("⚠️ Esta filial vendeu abaixo da média geral.")
 else:
-st.success("■ Esta filial está performando acima da média!")
+    st.success("✅ Esta filial está performando acima da média!")
 
 
 st.metric("Total Vendido", f'R$ {df_filtro["preco"].sum():,.2f}')
@@ -80,6 +80,7 @@ if st.button("📥 Baixar Relatório"):
             file_name="relatorio_vendas.pdf",
             mime="application/pdf"
         )
+
 
 
 
