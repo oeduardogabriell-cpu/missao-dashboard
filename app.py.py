@@ -12,8 +12,10 @@ df_filtro = df[df["filial"] == filial]
 
 media_vendas = df.groupby("filial")["preco"].sum().mean()
 vendas_filial = df_filtro["preco"].sum()
+
 if vendas_filial < media_vendas:
 st.error("■■ Esta filial vendeu abaixo da média!")
+
 else:
 st.success("■ Esta filial está performando acima da média!")
 
