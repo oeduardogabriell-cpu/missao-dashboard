@@ -81,6 +81,11 @@ if st.button("📥 Baixar Relatório"):
             mime="application/pdf"
         )
 
+# Supondo que você já gerou suas figuras matplotlib (fig_bar, fig_pie, fig_line)
+# Salve as figuras temporariamente fig_bar.savefig("bar.png", dpi=160, bbox_inches="tight") fig_pie.savefig("pie.png", dpi=160, bbox_inches="tight") fig_line.savefig("line.png", dpi=160, bbox_inches="tight")
+# Dentro do bloco de geração de PDF, após adicionar textos: for img in ["bar.png", "pie.png", "line.png"]:
+pdf.image(img, w=180) # Ajuste a largura conforme necessário 
+
 
 
 
